@@ -15,12 +15,14 @@
   <div *ngIf="showPanel" class="web-option-container">
     <div>
       <label>Número de páginas:</label>
+      <span class="info-icon" (click)="openModal('Añade las páginas que tendrá tu proyecto. El coste de cada página es de 30€.')">[i]</span>
       <button (click)="changePages(-1)" [disabled]="numberOfPages <= 1">-</button>
       {{ numberOfPages }}
       <button (click)="changePages(1)">+</button>
     </div>
     <div>
       <label>Número de idiomas:</label>
+      <span class="info-icon" (click)="openModal('Añade los lenguajes que tendrá tu proyecto. El coste de cada idioma es de 30€.')">[i]</span>
       <button (click)="changeLanguages(-1)" [disabled]="numberOfLanguages <= 1">-</button>
       {{ numberOfLanguages }}
       <button (click)="changeLanguages(1)">+</button>
@@ -31,3 +33,6 @@
 <div class="total-budget">
   Presupuesto Total: {{ totalBudget }}€
 </div>
+
+<!-- Componente modal para mostrar información -->
+<app-info-modal [content]="modalContent" [show]="showModal" (close)="closeModal()"></app-info-modal>

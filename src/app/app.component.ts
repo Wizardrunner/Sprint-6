@@ -1,11 +1,13 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { InfoModalComponent } from './info-modal/info-modal.component'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, InfoModalComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -17,6 +19,19 @@ export class AppComponent {
   totalBudget: number = 0;
   numberOfPages: number = 0; // Inicia en 0
   numberOfLanguages: number = 0; // Inicia en 0
+  modalContent: string = '';
+  showModal: boolean = false;
+
+  // Método para abrir el modal
+  openModal(content: string): void {
+    this.modalContent = content;
+    this.showModal = true;
+  }
+
+  // Método para cerrar el modal
+  closeModal(): void {
+    this.showModal = false;
+  }
 
   updateWebOption(): void {
     this.showPanel = this.web;
