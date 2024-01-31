@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { InfoModalComponent } from './info-modal/info-modal.component';
 import { BudgetService } from './budget.service';
 import { BudgetsListComponent } from './budgets-list/budgets-list.component';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -68,7 +69,32 @@ export class AppComponent {
     this.calculateBudget(); // Recalcula el presupuesto con cada cambio.
   }
 
-  constructor(private budgetService: BudgetService) {}
+  constructor(
+    private budgetService: BudgetService, 
+    private route: ActivatedRoute
+  ) {
+    // Restaura el estado desde la URL al iniciar la aplicación
+    this.restoreStateFromURL();
+  }
+
+  private restoreStateFromURL() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['WebPage'] !== undefined) {
+        this.web = params['WebPage'] === 'true';
+      }
+      if (params['CampaingSeo'] !== undefined) {
+        this.seo = params['CampaingSeo'] === 'true';
+      }
+      if (params['pages'] !== undefined) {
+        this.numberOfPages = Number(params['pages']) || 0;
+      }
+      if (params['lang'] !== undefined) {
+        this.numberOfLanguages = Number(params['lang']) || 0;
+      }
+      // Recalcular el presupuesto basado en los parámetros actualizados
+      this.calculateBudget();
+    });
+  }
 
   requestBudget() {
     const budgetDetails = {
@@ -76,13 +102,17 @@ export class AppComponent {
       phone: this.customerPhone,
       email: this.customerEmail,
       services: this.getServices(),
-      total: this.totalBudget
+      total: this.totalBudget,
+      web: this.web,           // Asegura que esta propiedad esté presente
+      seo: this.seo,           // Asegura que esta propiedad esté presente
+      pages: this.numberOfPages, // Asegura que esta propiedad esté presente
+      languages: this.numberOfLanguages // Asegura que esta propiedad esté presente
     };
-
+  
     this.budgetService.addBudget(budgetDetails);
     this.resetForm();
   }
-
+  
     // Agrega un método para obtener los presupuestos
     getBudgets() {
       return this.budgetService.getBudgets();

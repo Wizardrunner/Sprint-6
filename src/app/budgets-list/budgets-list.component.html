@@ -1,2 +1,11 @@
-<!--src/app/budgets-list/budgets-list.component.html-->
-<p>budgets-list works!</p>
+<!-- src/app/budgets-list/budgets-list.component.html -->
+<div *ngFor="let budget of budgets" class="budget-box">
+    <!-- Contenido existente del presupuesto -->
+    <div>{{budget.name}} ({{budget.phone}}, {{budget.email}})</div>
+    <div>Servicios contratados: {{budget.services}}</div>
+    <div>Total: {{budget.total}}€</div>
+  
+    <!-- Botón para compartir la URL del presupuesto -->
+    <button (click)="shareBudgetURL(budget)">Compartir URL</button>
+  </div>
+  
