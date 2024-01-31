@@ -9,6 +9,7 @@ export class BudgetService {
   private numberOfPages = 1;
   private numberOfLanguages = 1;
 
+  
   setPages(pages: number) {
     this.numberOfPages = pages;
   }
@@ -34,7 +35,11 @@ export class BudgetService {
     return total;
   }
   addBudget(budget: any) {
-    this.budgets.push(budget);
+    const newBudget = {
+      ...budget,
+      date: new Date() // Agrega la fecha actual al presupuesto
+    };
+    this.budgets.push(newBudget);
   }
 
   getBudgets() {

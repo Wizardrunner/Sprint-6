@@ -49,3 +49,14 @@
 </div>
 
 <app-budgets-list [budgets]="getBudgets()"></app-budgets-list>
+
+<!-- Botones para ordenar y campo de búsqueda -->
+<div class="sorting-controls">
+  <button (click)="sortByDate()">Ordenar por Fecha</button>
+  <button (click)="sortByPrice()">Ordenar por Precio</button>
+  <button (click)="sortAlphabetically()">Ordenar Alfabéticamente</button>
+  <input type="text" [(ngModel)]="filterText" placeholder="Buscar por nombre del cliente">
+</div>
+
+<!-- Listado de presupuestos -->
+<app-budgets-list [budgets]="getFilteredBudgets()"></app-budgets-list>

@@ -28,6 +28,9 @@ export class AppComponent {
   customerPhone: string = '';
   customerEmail: string = '';
 
+  // Propiedad para el filtro de búsqueda
+  filterText: string = '';
+
   // Método para abrir el modal
   openModal(content: string): void {
     this.modalContent = content;
@@ -100,6 +103,29 @@ export class AppComponent {
       this.seo = this.ads = this.web = false;
       this.numberOfPages = this.numberOfLanguages = 0;
       this.calculateBudget();
+    }
+    // Métodos para ordenar los presupuestos
+    sortByDate() {
+      const budgets = this.getBudgets();
+      budgets.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    }
+  
+    sortByPrice() {
+      const budgets = this.getBudgets();
+      budgets.sort((a, b) => b.total - a.total);
+      // Implementar actualización de la lista
+    }
+  
+    sortAlphabetically() {
+      const budgets = this.getBudgets();
+      budgets.sort((a, b) => a.name.localeCompare(b.name));
+      // Implementar actualización de la lista
+    }
+  
+    getFilteredBudgets() {
+      if (!this.filterText) return this.getBudgets();
+      return this.getBudgets().filter(budget => 
+        budget.name.toLowerCase().includes(this.filterText.toLowerCase()));
     }
   
 }
