@@ -20,8 +20,8 @@ export class AppComponent {
   web: boolean = false;
   showPanel: boolean = false;
   totalBudget: number = 0;
-  numberOfPages: number = 0; // Inicia en 0
-  numberOfLanguages: number = 0; // Inicia en 0
+  numberOfPages: number = 0;
+  numberOfLanguages: number = 0;
   modalContent: string = '';
   showModal: boolean = false;
 
@@ -29,10 +29,35 @@ export class AppComponent {
   customerPhone: string = '';
   customerEmail: string = '';
 
+  nameError: string = '';
+  phoneError: string = '';
+  emailError: string = '';
+
   // Propiedad para el filtro de búsqueda
   filterText: string = '';
   currentSort: { field: string, direction: string } = { field: '', direction: 'asc' };
 
+  validateName() {
+    const regex = /^[a-zA-ZñÑçÇáéíóúÁÉÍÓÚ\s]{3,}$/;
+    if (!regex.test(this.customerName)) {
+      this.nameError = "Solo letras y tres como mínimo";
+    }
+  }
+
+  validatePhone() {
+    const regex = /^[0-9]{9}$/;
+    if (!regex.test(this.customerPhone)) {
+      this.phoneError = "Solo números y deben de ser nueve";
+    }
+  }
+
+  validateEmail() {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!regex.test(this.customerEmail)) {
+      this.emailError = "Solo formato de email";
+    }
+  }
+  
   // Método para abrir el modal
   openModal(content: string): void {
     this.modalContent = content;
@@ -103,18 +128,35 @@ export class AppComponent {
 
 
   requestBudget() {
+    // Primero, restablecemos los mensajes de error
+    this.nameError = '';
+    this.phoneError = '';
+    this.emailError = '';
+
+    // Luego, validamos cada campo
+    this.validateName();
+    this.validatePhone();
+    this.validateEmail();
+
+    // Si hay algún error, interrumpimos la ejecución aquí
+    if (this.nameError || this.phoneError || this.emailError) {
+      return;
+    }
+
+    // Si todo es válido, procedemos a crear el objeto de presupuesto
     const budgetDetails = {
       name: this.customerName,
       phone: this.customerPhone,
       email: this.customerEmail,
       services: this.getServices(),
       total: this.totalBudget,
-      web: this.web,           // Asegura que esta propiedad esté presente
-      seo: this.seo,           // Asegura que esta propiedad esté presente
-      pages: this.numberOfPages, // Asegura que esta propiedad esté presente
-      languages: this.numberOfLanguages // Asegura que esta propiedad esté presente
+      web: this.web,
+      seo: this.seo,
+      pages: this.numberOfPages,
+      languages: this.numberOfLanguages
     };
-  
+
+    // Y lo añadimos a través del servicio de presupuestos
     this.budgetService.addBudget(budgetDetails);
     this.resetForm();
   }
@@ -194,6 +236,4 @@ export class AppComponent {
     
       this.budgetService.setBudgets(budgets);
     }
-      
-  
 }

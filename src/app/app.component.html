@@ -38,14 +38,21 @@
 <!-- Componente modal para mostrar información -->
 <app-info-modal [content]="modalContent" [show]="showModal" (close)="closeModal()"></app-info-modal>
 
-<!--Formulario para que los usuarios puedan meter sus datos-->
+<!-- Formulario para que los usuarios puedan meter sus datos -->
 <div class="option-box">
   <h3>Pedir presupuesto</h3>
   <input type="text" [(ngModel)]="customerName" placeholder="Nombre del cliente/a">
+  <div *ngIf="nameError" class="error">{{nameError}}</div>
+
   <input type="text" [(ngModel)]="customerPhone" placeholder="Teléfono">
+  <div *ngIf="phoneError" class="error">{{phoneError}}</div>
+
   <input type="email" [(ngModel)]="customerEmail" placeholder="Email">
+  <div *ngIf="emailError" class="error">{{emailError}}</div>
+
   <button (click)="requestBudget()">Solicitar presupuesto</button>
 </div>
+
 
 <!-- Botones para ordenar y campo de búsqueda -->
 <div class="sorting-controls">

@@ -1,27 +1,32 @@
 /* Estilos generales para los cuadros de opciones */
 .option-box {
-    border: 2px solid #d4d4d4; /* Borde sólido con color gris claro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    padding: 20px; /* Espaciado interno */
-    margin-bottom: 20px; /* Espaciado entre cuadros */
-    background-color: #f9f9f9; /* Color de fondo claro */
-  }
+  border: 2px solid #d4d4d4;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
   
-  /* Estilo para el contenedor de la opción de página web que incluye los inputs */
-  .web-option-container {
-    margin-top: 20px; /* Espaciado superior para separarlo de la opción de página web */
-  }
-  
-  /* Estilos para los botones e inputs */
-  button, input[type="number"] {
-    margin: 0 5px; /* Espaciado alrededor de los botones e inputs */
-  }
-  
-  /* Estilo para el texto del presupuesto total */
-  .total-budget {
-    font-weight: bold; /* Texto en negrita */
-    font-size: 1.2em; /* Tamaño de fuente grande */
-    margin-top: 20px; /* Espaciado superior */
-  }
+/* Estilo para el contenedor de la opción de página web que incluye los inputs */
+.web-option-container {
+  margin-top: 20px; /* Espaciado superior para separarlo de la opción de página web */
+}
+
+/* Estilos para los botones e inputs */
+button, input[type="number"] {
+  margin: 0 5px; /* Espaciado alrededor de los botones e inputs */
+}
+
+/* Estilo para el texto del presupuesto total */
+.total-budget {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+}
   
