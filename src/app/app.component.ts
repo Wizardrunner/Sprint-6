@@ -96,6 +96,12 @@ export class AppComponent {
     });
   }
 
+  handleShareUrl(url: string) {
+    this.modalContent = url;
+    this.showModal = true;
+  }
+
+
   requestBudget() {
     const budgetDetails = {
       name: this.customerName,
@@ -163,6 +169,7 @@ export class AppComponent {
       const budgets = this.getBudgets();
       const isAsc = this.currentSort.field === field && this.currentSort.direction === 'asc';
       
+    
       // Actualizar la dirección en la primera llamada si el campo es el mismo
       if (this.currentSort.field === field) {
         this.currentSort.direction = isAsc ? 'desc' : 'asc';

@@ -1,5 +1,5 @@
 // src/app/budgets-list/budgets-list.component.ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -23,9 +23,11 @@ import { CommonModule } from '@angular/common';
 })
 export class BudgetsListComponent {
   @Input() budgets: Array<any> = [];
+  @Output() shareUrl = new EventEmitter<string>(); // Nuevo EventEmitter
 
   shareBudgetURL(budget: any) {
     const url = this.generateBudgetURL(budget);
+    this.shareUrl.emit(url); // Emitir la URL
     navigator.clipboard.writeText(url).then(() => {
       console.log('URL copiada al portapapeles');
     }).catch(err => {

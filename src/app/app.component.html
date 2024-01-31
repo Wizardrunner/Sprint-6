@@ -56,4 +56,7 @@
 </div>
 
 <!-- Listado de presupuestos -->
-<app-budgets-list [budgets]="getFilteredBudgets()"></app-budgets-list>
+<app-budgets-list [budgets]="getFilteredBudgets()" (shareUrl)="handleShareUrl($event)"></app-budgets-list>
+
+<!-- Componente modal para mostrar la URL -->
+<app-info-modal [content]="modalContent" [show]="showModal" (close)="closeModal()"></app-info-modal>

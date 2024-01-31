@@ -8,4 +8,5 @@
     <!-- Botón para compartir la URL del presupuesto -->
     <button (click)="shareBudgetURL(budget)">Compartir URL</button>
   </div>
-  
+  <!-- Modal para mostrar la URL -->
+<app-info-modal *ngIf="showModal" [content]="modalContent" (close)="closeModal()"></app-info-modal>
