@@ -49,9 +49,9 @@
 
 <!-- Botones para ordenar y campo de búsqueda -->
 <div class="sorting-controls">
-  <button (click)="sortByDate()">Ordenar por Fecha</button>
-  <button (click)="sortByPrice()">Ordenar por Precio</button>
-  <button (click)="sortAlphabetically()">Ordenar Alfabéticamente</button>
+  <button (click)="sortBudgets('date')">Ordenar por Fecha</button>
+  <button (click)="sortBudgets('total')">Ordenar por Precio</button>
+  <button (click)="sortBudgets('name')">Ordenar Alfabéticamente</button>
   <input type="text" [(ngModel)]="filterText" placeholder="Buscar por nombre del cliente">
 </div>
 

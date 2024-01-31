@@ -30,6 +30,7 @@ export class AppComponent {
 
   // Propiedad para el filtro de búsqueda
   filterText: string = '';
+  currentSort: { field: string, direction: string } = { field: '', direction: 'asc' };
 
   // Método para abrir el modal
   openModal(content: string): void {
@@ -127,5 +128,35 @@ export class AppComponent {
       return this.getBudgets().filter(budget => 
         budget.name.toLowerCase().includes(this.filterText.toLowerCase()));
     }
+
+    sortBudgets(field: 'date' | 'total' | 'name') {
+      const budgets = this.getBudgets();
+      const isAsc = this.currentSort.field === field && this.currentSort.direction === 'asc';
+      
+      // Actualizar la dirección en la primera llamada si el campo es el mismo
+      if (this.currentSort.field === field) {
+        this.currentSort.direction = isAsc ? 'desc' : 'asc';
+      } else {
+        // Si se cambia de campo, empezar con 'asc'
+        this.currentSort.direction = 'asc';
+      }
+    
+      this.currentSort.field = field;
+      
+      budgets.sort((a, b) => {
+        let comparison = 0;
+        if (field === 'date') {
+          comparison = new Date(a.date).getTime() - new Date(b.date).getTime();
+        } else if (field === 'total') {
+          comparison = a.total - b.total;
+        } else if (field === 'name') {
+          comparison = a.name.localeCompare(b.name);
+        }
+        return this.currentSort.direction === 'asc' ? comparison : -comparison;
+      });
+    
+      this.budgetService.setBudgets(budgets);
+    }
+      
   
 }

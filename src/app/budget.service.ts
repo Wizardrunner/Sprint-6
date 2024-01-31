@@ -46,4 +46,9 @@ export class BudgetService {
     return this.budgets;
   }
 
+  setBudgets(budgets: any[]) {
+    this.budgets = budgets;
+  }
+
+
 }
