@@ -2,12 +2,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InfoModalComponent } from './info-modal/info-modal.component'; // Asegúrate de que la ruta sea correcta
+import { InfoModalComponent } from './info-modal/info-modal.component';
+import { BudgetService } from './budget.service';
+import { BudgetsListComponent } from './budgets-list/budgets-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, CommonModule, InfoModalComponent],
+  imports: [FormsModule, CommonModule, InfoModalComponent, BudgetsListComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -21,6 +23,10 @@ export class AppComponent {
   numberOfLanguages: number = 0; // Inicia en 0
   modalContent: string = '';
   showModal: boolean = false;
+
+  customerName: string = '';
+  customerPhone: string = '';
+  customerEmail: string = '';
 
   // Método para abrir el modal
   openModal(content: string): void {
@@ -57,4 +63,43 @@ export class AppComponent {
     this.numberOfLanguages = Math.max(0, this.numberOfLanguages + change); // Asegura que no sea menor a 0.
     this.calculateBudget(); // Recalcula el presupuesto con cada cambio.
   }
+
+  constructor(private budgetService: BudgetService) {}
+
+  requestBudget() {
+    const budgetDetails = {
+      name: this.customerName,
+      phone: this.customerPhone,
+      email: this.customerEmail,
+      services: this.getServices(),
+      total: this.totalBudget
+    };
+
+    this.budgetService.addBudget(budgetDetails);
+    this.resetForm();
+  }
+
+    // Agrega un método para obtener los presupuestos
+    getBudgets() {
+      return this.budgetService.getBudgets();
+    }
+  
+  
+    getServices() {
+      let services = [];
+      if (this.seo) services.push('SEO');
+      if (this.ads) services.push('Publicidad');
+      if (this.web) services.push(`Web (${this.numberOfPages} páginas, ${this.numberOfLanguages} idiomas)`);
+      return services.join(', ');
+    }
+  
+    resetForm() {
+      this.customerName = '';
+      this.customerPhone = '';
+      this.customerEmail = '';
+      this.seo = this.ads = this.web = false;
+      this.numberOfPages = this.numberOfLanguages = 0;
+      this.calculateBudget();
+    }
+  
 }

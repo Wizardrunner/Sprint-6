@@ -1,10 +1,11 @@
-// budget.service.ts
+// src/app/budget.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetService {
+  private budgets: any[] = [];
   private numberOfPages = 1;
   private numberOfLanguages = 1;
 
@@ -32,4 +33,12 @@ export class BudgetService {
     total += pages * languages * 30; // Costo adicional por el número de páginas e idiomas
     return total;
   }
+  addBudget(budget: any) {
+    this.budgets.push(budget);
+  }
+
+  getBudgets() {
+    return this.budgets;
+  }
+
 }

@@ -1,3 +1,4 @@
+<!--src/app/app.component.html-->
 <div class="option-box">
   <input type="checkbox" id="seo" [(ngModel)]="seo" (change)="calculateBudget()"> 
   <label for="seo">Hacer una campaña SEO (300€)</label>
@@ -36,3 +37,15 @@
 
 <!-- Componente modal para mostrar información -->
 <app-info-modal [content]="modalContent" [show]="showModal" (close)="closeModal()"></app-info-modal>
+
+
+<!--Formulario para que los usuarios puedan meter sus datos-->
+<div class="option-box">
+  <h3>Pedir presupuesto</h3>
+  <input type="text" [(ngModel)]="customerName" placeholder="Nombre del cliente/a">
+  <input type="text" [(ngModel)]="customerPhone" placeholder="Teléfono">
+  <input type="email" [(ngModel)]="customerEmail" placeholder="Email">
+  <button (click)="requestBudget()">Solicitar presupuesto</button>
+</div>
+
+<app-budgets-list [budgets]="getBudgets()"></app-budgets-list>
