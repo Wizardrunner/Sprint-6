@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .options div, .total {
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .options input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
