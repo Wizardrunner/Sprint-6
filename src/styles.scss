@@ -49,3 +49,26 @@
 .border-gray {
   border-color: #6c757d !important; // Cambia el color del borde a gris oscuro
 }
+
+.no-budgets {
+  width: 936px;
+  margin: auto;
+  padding: 20px;
+  text-align: left;
+}
+
+// Ajustes para los botones sin fondo
+.btn-link {
+  color: #000; // Cambia el color según tu diseño
+  padding: 0;
+  margin-right: 15px; // Asegura un espacio entre botones
+
+  &:hover {
+    color: #0056b3; // Cambia el color para el estado hover
+    text-decoration: underline;
+  }
+  
+  .bi {
+    margin-left: 5px; // Espacio entre el texto y la flecha
+  }
+}

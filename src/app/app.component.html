@@ -106,11 +106,24 @@
 </div>
 
 <!-- Botones para ordenar y campo de búsqueda -->
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto d-flex justify-content-end gap-2">
-  <button class="btn btn-outline-secondary" (click)="sortBudgets('date')">Data</button>
-  <button class="btn btn-outline-secondary" (click)="sortBudgets('total')">Import</button>
-  <button class="btn btn-outline-secondary" (click)="sortBudgets('name')">Nom</button>
-  <input type="text" [(ngModel)]="filterText" placeholder="Buscar per nom del client" class="form-control border-light rounded input-fixed-width">
+<div class="option-box-container mx-auto" style="width: 936px;">
+  <hr class="my-4"/> <!-- Línea divisoria -->
+  <h2 class="mb-3">Pressupostos en curs:</h2> <!-- Título -->
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <!-- Ajustes para el buscador con símbolo de lupa -->
+    <div class="input-group" style="width: auto;">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="filterText">
+    </div>
+
+    <!-- Ajustes para los botones sin fondo y con flechas dinámicas -->
+    <div>
+      <button class="btn btn-link text-decoration-none" (click)="sortBudgets('date')">Data <i class="bi" [class]="currentSort.field === 'date' ? (currentSort.direction === 'asc' ? 'bi-caret-up-fill' : 'bi-caret-down-fill') : ''"></i></button>
+      <button class="btn btn-link text-decoration-none" (click)="sortBudgets('total')">Import <i class="bi" [class]="currentSort.field === 'total' ? (currentSort.direction === 'asc' ? 'bi-caret-up-fill' : 'bi-caret-down-fill') : ''"></i></button>
+      <button class="btn btn-link text-decoration-none" (click)="sortBudgets('name')">Nom <i class="bi" [class]="currentSort.field === 'name' ? (currentSort.direction === 'asc' ? 'bi-caret-up-fill' : 'bi-caret-down-fill') : ''"></i></button>
+    </div>
+  </div>
 </div>
 
 <!-- Listado de presupuestos -->
