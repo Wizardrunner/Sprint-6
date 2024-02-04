@@ -5,7 +5,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   selector: 'app-panel',
   standalone: true,
   templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.css']
+  styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent {
   numberOfPages: number = 1;

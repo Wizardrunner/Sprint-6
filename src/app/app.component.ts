@@ -12,7 +12,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   standalone: true,
   imports: [FormsModule, CommonModule, InfoModalComponent, BudgetsListComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   seo: boolean = false;
@@ -62,8 +62,9 @@ export class AppComponent {
   openModal(content: string): void {
     this.modalContent = content;
     this.showModal = true;
+    console.log('Modal should open:', this.showModal, this.modalContent);
   }
-
+  
   // Método para cerrar el modal
   closeModal(): void {
     this.showModal = false;

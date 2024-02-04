@@ -1,18 +1,12 @@
-// src/app/info-modal/info-modal.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Importar CommonModule
 
 @Component({
   selector: 'app-info-modal',
   standalone: true,
-  template: `
-    @if (show) {
-      <div class="modal">
-        <p>{{ content }}</p>
-        <button (click)="closeModal()">Cerrar</button>
-      </div>
-    }
-  `,
-  styleUrls: ['./info-modal.component.css']
+  imports: [CommonModule], // Añadir CommonModule aquí
+  templateUrl: './info-modal.component.html',
+  styleUrls: ['./info-modal.component.scss']
 })
 export class InfoModalComponent {
   @Input() content: string = '';

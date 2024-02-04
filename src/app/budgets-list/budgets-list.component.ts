@@ -8,18 +8,18 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div *ngIf="budgets.length > 0">
-      <div *ngFor="let budget of budgets" class="budget-box">
+      <div *ngFor="let budget of budgets" class="option-box p-5 mb-4 bg-white rounded-3 mx-auto d-flex align-items-center justify-content-between">
         <div>{{budget.name}} ({{budget.phone}}, {{budget.email}})</div>
-        <div>Servicios contratados: {{budget.services}}</div>
+        <div>Serveis contractats: {{budget.services}}</div>
         <div>Total: {{budget.total}}€</div>
-        <button (click)="shareBudgetURL(budget)">Compartir URL</button>
+        <button class="btn btn-primary" (click)="shareBudgetURL(budget)">Compartir URL</button>
       </div>
     </div>
-    <div *ngIf="budgets.length === 0">
-      <p>No hay presupuestos disponibles.</p>
-    </div>
+    <div *ngIf="budgets.length === 0" class="mx-auto nohiha">
+    <p>No hi ha pressupostos disponibles.</p>
+  </div>
   `,
-  styleUrls: ['./budgets-list.component.css']
+  styleUrls: ['./budgets-list.component.scss']
 })
 export class BudgetsListComponent {
   @Input() budgets: Array<any> = [];
@@ -39,7 +39,6 @@ export class BudgetsListComponent {
     const baseUrl = 'http://localhost:4200/home';
     const queryParams = [];
   
-    // Asegúrate de que las propiedades existen y son válidas
     if (budget.web !== undefined) queryParams.push(`WebPage=${budget.web}`);
     if (budget.seo !== undefined) queryParams.push(`CampaingSeo=${budget.seo}`);
     if (budget.pages !== undefined) queryParams.push(`pages=${budget.pages}`);

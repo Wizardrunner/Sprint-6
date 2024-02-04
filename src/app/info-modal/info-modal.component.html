@@ -1,7 +1,7 @@
-<div class="modal-background">
-    <div class="modal">
-      <p>{{ content }}</p>
-      <!-- Botón para cerrar el modal, si es necesario -->
-    </div>
+<!-- src/app/info-modal/info-modal.component.html -->
+<div *ngIf="show" class="modal-background">
+  <div class="mi-modal">
+    <p>{{ content }}</p>
+    <button class="btn btn-primary" (click)="closeModal()">Tancar</button>
   </div>
-  
+</div>

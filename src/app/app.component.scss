@@ -1,11 +1,8 @@
-/* Estilos generales para los cuadros de opciones */
+/* app.component.scss*/
+/* stilos generales para los cuadros de opciones */
 .option-box {
-  border: 2px solid #d4d4d4;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
+  width: 936px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .15);
 }
   
 /* Estilo para el contenedor de la opción de página web que incluye los inputs */
