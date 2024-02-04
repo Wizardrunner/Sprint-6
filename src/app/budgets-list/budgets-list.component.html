@@ -1,14 +1,2 @@
 <!--src/app/budget-list.component.html-->
-<div *ngIf="budgets.length > 0" class="container mt-4">
-  <div *ngFor="let budget of budgets" class="option-box p-5 mb-4 bg-white rounded-3 mx-auto">
-    <div class="d-flex justify-content-between align-items-center">
-      <p>{{ budget.name }} ({{ budget.phone }}, {{ budget.email }})</p>
-      <p>Serveis contractats: {{ budget.services }}</p>
-      <p>Total: {{ budget.total }}€</p>
-      <!-- Asegúrate de que el estilo de botón de Bootstrap se aplique correctamente -->
-      <button class="btn btn-primary" (click)="handleShareUrl(budget)">Compartir URL</button>
-    </div>
-  </div>
-</div>
-<!-- Asegúrate de que los inputs de showModal y modalContent se actualizan correctamente en el componente padre -->
 <app-info-modal *ngIf="showModal" [content]="modalContent" (close)="closeModal()"></app-info-modal>

@@ -1,7 +1,11 @@
 <!-- src/app/info-modal/info-modal.component.html -->
 <div *ngIf="show" class="modal-background">
   <div class="mi-modal">
-    <p>{{ content }}</p>
-    <button class="btn btn-primary" (click)="closeModal()">Tancar</button>
-  </div>
+    <div [innerHTML]="content">
+      <p>{{ content }}</p>
+    </div>
+    <div class="text-end">
+      <button class="btn btn-primary" (click)="closeModal()">Tancar</button>
+    </div>
+      </div>
 </div>

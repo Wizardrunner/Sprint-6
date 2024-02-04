@@ -40,21 +40,21 @@ export class AppComponent {
   validateName() {
     const regex = /^[a-zA-ZñÑçÇáéíóúÁÉÍÓÚ\s]{3,}$/;
     if (!regex.test(this.customerName)) {
-      this.nameError = "Solo letras y tres como mínimo";
+      this.nameError = "¡Mínimo 3 letras!";
     }
   }
 
   validatePhone() {
     const regex = /^[0-9]{9}$/;
     if (!regex.test(this.customerPhone)) {
-      this.phoneError = "Solo números y deben de ser nueve";
+      this.phoneError = "¡9 números!";
     }
   }
 
   validateEmail() {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!regex.test(this.customerEmail)) {
-      this.emailError = "Solo formato de email";
+      this.emailError = "¡Formato de email!";
     }
   }
   
@@ -172,8 +172,10 @@ export class AppComponent {
       let services = [];
       if (this.seo) services.push('SEO');
       if (this.ads) services.push('Publicidad');
-      if (this.web) services.push(`Web (${this.numberOfPages} páginas, ${this.numberOfLanguages} idiomas)`);
-      return services.join(', ');
+      if (this.web) {
+        services.push(`Web (${this.numberOfPages} páginas ${this.numberOfLanguages} idiomas)`);
+      }
+          return services.join(', ');
     }
   
     resetForm() {

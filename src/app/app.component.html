@@ -1,91 +1,101 @@
 <!--src/app/app.component.html-->
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto">
+<div class="option-box p-5 m-5 bg-white rounded-3 mx-auto">
   <h1 class="text-center fw-bold">Aconsegueix la millor qualitat</h1>
 </div>
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto d-flex align-items-center justify-content-between">
-  <div class="text-start">
-    <span class="h4 fw-bold">Seo</span>
-    <br>
-    <span>Fer una campanya SEO</span>
-  </div>
-  <div class="text-center flex-grow-1">
-    <span class="h4 fw-bold">300</span><span class="text-small">€</span>
-  </div>
-  <div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" id="seo" [(ngModel)]="seo" (change)="calculateBudget()">
-    <label class="form-check-label" for="seo">Afegir</label>
-  </div>
-</div>
-
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto d-flex align-items-center justify-content-between">
-  <div class="text-start">
-    <span class="h4 fw-bold">Ads</span>
-    <br>
-    <span>Fer una campanya de publicitat</span>
-  </div>
-  <div class="text-center flex-grow-1">
-    <span class="h4 fw-bold">400</span><span class="text-small">€</span>
-  </div>
-  <div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" id="ads" [(ngModel)]="ads" (change)="calculateBudget()">
-    <label class="form-check-label" for="ads">Afegir</label>
+<!-- SEO Option Box -->
+<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-azul': seo}">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <span class="h4 fw-bold">Seo</span><br>
+      <span>Fer una campanya SEO</span>
+    </div>
+    <div class="col-md-4 text-center">
+      <span class="h4 fw-bold price-number">300</span><span class="text-small">€</span>
+    </div>
+    <div class="col-md-4 d-flex justify-content-end">
+      <div class="form-check form-switch d-flex align-items-center">
+        <input class="form-check-input" type="checkbox" id="seo" [(ngModel)]="seo" (change)="calculateBudget()">
+        <label class="form-check-label ms-2" for="seo">Afegir</label>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto d-flex flex-column">
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="text-start">
-      <span class="h4 fw-bold">Web</span>
-      <br>
+<!-- Ads Option Box -->
+<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-azul': ads}">
+  <div class="row align-items-center">
+    <div class="col-6 col-md-4">
+      <span class="h4 fw-bold">Ads</span><br>
+      <span>Fer una campanya de publicitat</span>
+    </div>
+    <div class="col-3 col-md-4 text-center">
+      <span class="h4 fw-bold price-number">400</span><span class="text-small">€</span>
+    </div>
+    <div class="col-md-4 d-flex justify-content-end">
+      <div class="form-check form-switch d-flex align-items-center">
+        <input class="form-check-input" type="checkbox" id="ads" [(ngModel)]="ads" (change)="calculateBudget()">
+        <label class="form-check-label ms-2" for="ads">Afegir</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Web Option Box -->
+<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-azul': web}">
+  <div class="row align-items-center">
+    <div class="col-6 col-md-4">
+      <span class="h4 fw-bold">Web</span><br>
       <span>Programació d'una web responsive completa</span>
     </div>
-    <div class="text-center flex-grow-1">
-      <span class="h4 fw-bold">500</span><span>€</span>
+    <div class="col-3 col-md-4 text-center">
+      <span class="h4 fw-bold price-number">500</span><span>€</span>
     </div>
-    <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" id="web" [(ngModel)]="web" (change)="updateWebOption()">
-      <label class="form-check-label" for="web">Afegir</label>
+    <div class="col-md-4 d-flex justify-content-end">
+      <div class="form-check form-switch d-flex align-items-center">
+        <input class="form-check-input" type="checkbox" id="web" [(ngModel)]="web" (change)="updateWebOption()">
+        <label class="form-check-label ms-2" for="web">Afegir</label>
+      </div>
     </div>
   </div>
 
   <div *ngIf="showPanel" class="web-option-container mt-3">
     <div class="d-flex align-items-center mb-2 justify-content-end">
       <!-- Botón de información para "Nombre de pàgines:" -->
-      <button class="btn btn-info btn-sm p-0 me-2" type="button" (click)="openModal('Afegeix les pàgines que tindrà el teu projecte. El cost de cada pàgina és de 30€.')">
+      <button class="btn btn-warning btn-sm p-0 me-2" type="button" (click)="openModal('Afegeix les pàgines que tindrà el teu projecte.<br>El cost de cada pàgina és de 30€.')">
         <i class="bi bi-info-circle-fill"></i>
       </button>
       <span class="fw-bold me-3">Nombre de pàgines:</span>
       <!-- Botón "-" sin borde -->
       <button class="btn btn-link p-0 me-1" type="button" (click)="changePages(-1)" [disabled]="numberOfPages <= 1">
-        <i class="bi bi-dash-circle-fill"></i>
+        <i class="bi bi-dash-circle-fill icon-blue"></i>
       </button>
       <input type="text" class="form-control form-control-sm mx-1" style="width: 60px;" [ngModel]="numberOfPages" readonly>
       <!-- Botón "+" sin borde -->
       <button class="btn btn-link p-0" type="button" (click)="changePages(1)">
-        <i class="bi bi-plus-circle-fill"></i>
+        <i class="bi bi-plus-circle-fill icon-blue"></i>
       </button>
     </div>
     <div class="d-flex align-items-center justify-content-end">
       <!-- Botón de información para "Nombre de llenguatges:" -->
-      <button class="btn btn-info btn-sm p-0 me-2" type="button" (click)="openModal('Afegeix els idiomes que tindrà el teu projecte. El cost de cada idioma és de 30€.')">
+      <button class="btn btn-warning btn-sm p-0 me-2" type="button" (click)="openModal('Afegeix els idiomes que tindrà el teu projecte.<br>El cost de cada idioma és de 30€.')">
         <i class="bi bi-info-circle-fill"></i>
       </button>
       <span class="fw-bold me-3">Nombre de llenguatges:</span>
       <!-- Botón "-" sin borde -->
       <button class="btn btn-link p-0 me-1" type="button" (click)="changeLanguages(-1)" [disabled]="numberOfLanguages <= 1">
-        <i class="bi bi-dash-circle-fill"></i>
+        <i class="bi bi-dash-circle-fill icon-blue"></i>
       </button>
       <input type="text" class="form-control form-control-sm mx-1" style="width: 60px;" [ngModel]="numberOfLanguages" readonly>
       <!-- Botón "+" sin borde -->
       <button class="btn btn-link p-0" type="button" (click)="changeLanguages(1)">
-        <i class="bi bi-plus-circle-fill"></i>
+        <i class="bi bi-plus-circle-fill icon-blue"></i>
       </button>
     </div>
   </div>
 </div>
 
-<div class="total-budget text-end pe-3 pb-4">
-  Preu pressuposat: {{ totalBudget }}€
+<div class="total-budget text-end pe-3 pb-4 fw-bold">
+  Preu pressuposat: <span class="fw-bold fs-2">{{ totalBudget }}</span>€
 </div>
 
 <!-- Componente modal para mostrar información -->
@@ -93,28 +103,43 @@
 
 <!-- Formulario para que los usuarios puedan meter sus datos -->
 <div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto">
-  <h3>Demanar pressupost</h3>
-  <div class="d-flex align-items-end gap-2 flex-wrap">
-    <input type="text" [(ngModel)]="customerName" placeholder="Nom del client/a" class="form-control border-gray rounded input-fixed-width">
-    <input type="text" [(ngModel)]="customerPhone" placeholder="Telèfon" class="form-control border-gray rounded input-fixed-width">
-    <input type="email" [(ngModel)]="customerEmail" placeholder="Email" class="form-control border-gray rounded input-fixed-width">
-    <button class="btn btn-primary" (click)="requestBudget()">Sol·licitar pressupost</button>
+  <h3 class="fw-bold">Demanar pressupost</h3>
+  <div class="d-flex flex-wrap gap-2">
+    <!-- Nombre del cliente -->
+    <div class="flex-grow-1">
+      <input type="text" [(ngModel)]="customerName" placeholder="Nom del client/a" class="form-control border-gray rounded">
+      <div *ngIf="nameError" class="text-danger">{{nameError}}</div>
+    </div>
+    
+    <!-- Teléfono -->
+    <div class="flex-grow-1">
+      <input type="text" [(ngModel)]="customerPhone" placeholder="Telèfon" class="form-control border-gray rounded">
+      <div *ngIf="phoneError" class="text-danger">{{phoneError}}</div>
+    </div>
+    
+    <!-- Email -->
+    <div class="flex-grow-1">
+      <input type="email" [(ngModel)]="customerEmail" placeholder="Email" class="form-control border-gray rounded">
+      <div *ngIf="emailError" class="text-danger">{{emailError}}</div>
+    </div>
+    
+    <!-- Botón de solicitud de presupuesto -->
+    <div class="d-flex align-items-end">
+      <button class="btn btn-primary" (click)="requestBudget()">Sol·licitar pressupost</button>
+    </div>
   </div>
-  <div *ngIf="nameError" class="error">{{nameError}}</div>
-  <div *ngIf="phoneError" class="error">{{phoneError}}</div>
-  <div *ngIf="emailError" class="error">{{emailError}}</div>
 </div>
 
 <!-- Botones para ordenar y campo de búsqueda -->
 <div class="option-box-container mx-auto" style="width: 936px;">
   <hr class="my-4"/> <!-- Línea divisoria -->
-  <h2 class="mb-3">Pressupostos en curs:</h2> <!-- Título -->
+  <h2 class="fw-bold mb-3">Pressupostos en curs:</h2>
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <!-- Ajustes para el buscador con símbolo de lupa -->
     <div class="input-group" style="width: auto;">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="filterText">
+      <input type="text" class="form-control" placeholder="Buscar per nom" [(ngModel)]="filterText">
     </div>
 
     <!-- Ajustes para los botones sin fondo y con flechas dinámicas -->

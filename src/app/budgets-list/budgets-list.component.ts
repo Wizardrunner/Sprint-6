@@ -7,14 +7,28 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div *ngIf="budgets.length > 0">
-      <div *ngFor="let budget of budgets" class="option-box p-5 mb-4 bg-white rounded-3 mx-auto d-flex align-items-center justify-content-between">
-        <div>{{budget.name}} ({{budget.phone}}, {{budget.email}})</div>
-        <div>Serveis contractats: {{budget.services}}</div>
-        <div>Total: {{budget.total}}€</div>
-        <button class="btn btn-primary" (click)="shareBudgetURL(budget)">Compartir URL</button>
+<div *ngIf="budgets.length > 0" class="container mt-4">
+  <div *ngFor="let budget of budgets" class="option-box p-5 mb-4 bg-white rounded-3 mx-auto">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h3 class="mb-2">{{ budget.name }}</h3>
+        <p class="mb-0">{{ budget.phone }}<br>{{ budget.email }}</p>
+      </div>
+      <div>
+        <h4 class="fw-bold mt-0 mb-2">Serveis contractats:</h4>
+        <ul class="list-unstyled">
+          <li *ngFor="let service of budget.services.split(', ')"><span class="me-2">•</span>{{ service }}</li>
+        </ul>
+      </div>
+      <div class="text-end">
+        <p class="fw-bold mt-0">Total: <span class="fw-bold fs-2">{{ budget.total }}</span>€</p>
       </div>
     </div>
+    <div class="text-end mt-3">
+      <button class="btn btn-primary" (click)="shareBudgetURL(budget)">Compartir URL</button>
+    </div>
+  </div>
+</div>
     <div *ngIf="budgets.length === 0" class="mx-auto nohiha">
     <p>No hi ha pressupostos disponibles.</p>
   </div>

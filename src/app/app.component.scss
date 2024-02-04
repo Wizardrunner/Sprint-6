@@ -1,10 +1,15 @@
 /* app.component.scss*/
 /* stilos generales para los cuadros de opciones */
+.border-azul {
+  border: 2px solid #007bff !important; /* Usa el azul de Bootstrap o el color azul que prefieras */
+}
+
 .option-box {
   width: 936px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .15);
-}
   
+}
+
 /* Estilo para el contenedor de la opción de página web que incluye los inputs */
 .web-option-container {
   margin-top: 20px; /* Espaciado superior para separarlo de la opción de página web */
@@ -26,4 +31,8 @@ button, input[type="number"] {
   color: red;
   margin-top: 5px;
 }
-  
+
+.price-number {
+  font-size: 2.5rem; 
+  font-weight: bold;
+}
