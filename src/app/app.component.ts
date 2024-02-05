@@ -24,6 +24,7 @@ export class AppComponent {
   numberOfLanguages: number = 0;
   modalContent: string = '';
   showModal: boolean = false;
+  serviceError: boolean = false;
 
   customerName: string = '';
   customerPhone: string = '';
@@ -32,6 +33,7 @@ export class AppComponent {
   nameError: string = '';
   phoneError: string = '';
   emailError: string = '';
+  serviceErrorMessage: string = '';
 
   // Propiedad para el filtro de búsqueda
   filterText: string = '';
@@ -58,6 +60,16 @@ export class AppComponent {
     }
   }
   
+  validateServiceSelection() {
+    if (!this.seo && !this.ads && !this.web) {
+      this.serviceError = true;
+      this.serviceErrorMessage = 'Seleccioni un Servei';
+    } else {
+      this.serviceError = false;
+      this.serviceErrorMessage = '';
+    }
+  }
+
   // Método para abrir el modal
   openModal(content: string): void {
     this.modalContent = content;
@@ -138,9 +150,10 @@ export class AppComponent {
     this.validateName();
     this.validatePhone();
     this.validateEmail();
+    this.validateServiceSelection();
 
     // Si hay algún error, interrumpimos la ejecución aquí
-    if (this.nameError || this.phoneError || this.emailError) {
+    if (this.serviceError || this.nameError || this.phoneError || this.emailError) {
       return;
     }
 

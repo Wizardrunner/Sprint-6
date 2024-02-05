@@ -2,61 +2,63 @@
 <div class="option-box p-5 m-5 bg-white rounded-3 mx-auto">
   <h1 class="text-center fw-bold">Aconsegueix la millor qualitat</h1>
 </div>
-<!-- SEO Option Box -->
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-azul': seo}">
-  <div class="row align-items-center">
-    <div class="col-md-4">
-      <span class="h4 fw-bold">Seo</span><br>
-      <span>Fer una campanya SEO</span>
-    </div>
-    <div class="col-md-4 text-center">
-      <span class="h4 fw-bold price-number">300</span><span class="text-small">€</span>
-    </div>
-    <div class="col-md-4 d-flex justify-content-end">
-      <div class="form-check form-switch d-flex align-items-center">
-        <input class="form-check-input" type="checkbox" id="seo" [(ngModel)]="seo" (change)="calculateBudget()">
-        <label class="form-check-label ms-2" for="seo">Afegir</label>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Ads Option Box -->
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-azul': ads}">
-  <div class="row align-items-center">
-    <div class="col-6 col-md-4">
-      <span class="h4 fw-bold">Ads</span><br>
-      <span>Fer una campanya de publicitat</span>
-    </div>
-    <div class="col-3 col-md-4 text-center">
-      <span class="h4 fw-bold price-number">400</span><span class="text-small">€</span>
-    </div>
-    <div class="col-md-4 d-flex justify-content-end">
-      <div class="form-check form-switch d-flex align-items-center">
-        <input class="form-check-input" type="checkbox" id="ads" [(ngModel)]="ads" (change)="calculateBudget()">
-        <label class="form-check-label ms-2" for="ads">Afegir</label>
+  <!-- SEO Option Box -->
+  <div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-danger': serviceError && !seo, 'border-azul': seo}">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+        <span class="h4 fw-bold">Seo</span><br>
+        <span>Fer una campanya SEO</span>
+      </div>
+      <div class="col-md-4 text-center">
+        <span class="h4 fw-bold price-number">300</span><span class="text-small">€</span>
+      </div>
+      <div class="col-md-4 d-flex justify-content-end">
+        <div class="form-check form-switch d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" id="seo" [(ngModel)]="seo" (change)="calculateBudget()">
+          <label class="form-check-label ms-2" for="seo">Afegir</label>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Web Option Box -->
-<div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-azul': web}">
-  <div class="row align-items-center">
-    <div class="col-6 col-md-4">
-      <span class="h4 fw-bold">Web</span><br>
-      <span>Programació d'una web responsive completa</span>
-    </div>
-    <div class="col-3 col-md-4 text-center">
-      <span class="h4 fw-bold price-number">500</span><span>€</span>
-    </div>
-    <div class="col-md-4 d-flex justify-content-end">
-      <div class="form-check form-switch d-flex align-items-center">
-        <input class="form-check-input" type="checkbox" id="web" [(ngModel)]="web" (change)="updateWebOption()">
-        <label class="form-check-label ms-2" for="web">Afegir</label>
+  <!-- Ads Option Box -->
+  <div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-danger': serviceError && !ads, 'border-azul': ads}">
+    <div class="row align-items-center">
+      <div class="col-6 col-md-4">
+        <span class="h4 fw-bold">Ads</span><br>
+        <span>Fer una campanya de publicitat</span>
+      </div>
+      <div class="col-3 col-md-4 text-center">
+        <span class="h4 fw-bold price-number">400</span><span class="text-small">€</span>
+      </div>
+      <div class="col-md-4 d-flex justify-content-end">
+        <div class="form-check form-switch d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" id="ads" [(ngModel)]="ads" (change)="calculateBudget()">
+          <label class="form-check-label ms-2" for="ads">Afegir</label>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Web Option Box -->
+  <div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto" [ngClass]="{'border-danger': serviceError && !web, 'border-azul': web}">
+    <div class="row align-items-center">
+      <div class="col-6 col-md-4">
+        <span class="h4 fw-bold">Web</span><br>
+        <span>Programació d'una web responsive completa</span>
+      </div>
+      <div class="col-3 col-md-4 text-center">
+        <span class="h4 fw-bold price-number">500</span><span>€</span>
+      </div>
+      <div class="col-md-4 d-flex justify-content-end">
+        <div class="form-check form-switch d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" id="web" [(ngModel)]="web" (change)="updateWebOption()">
+          <label class="form-check-label ms-2" for="web">Afegir</label>
+        </div>
+      </div>
+    </div>
+
 
   <div *ngIf="showPanel" class="web-option-container mt-3">
     <div class="d-flex align-items-center mb-2 justify-content-end">
@@ -105,27 +107,25 @@
 <div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto">
   <h3 class="fw-bold">Demanar pressupost</h3>
   <div class="d-flex flex-wrap gap-2">
-    <!-- Nombre del cliente -->
+    <!-- Inputs para Nombre, Teléfono y Email -->
     <div class="flex-grow-1">
       <input type="text" [(ngModel)]="customerName" placeholder="Nom del client/a" class="form-control border-gray rounded">
       <div *ngIf="nameError" class="text-danger">{{nameError}}</div>
     </div>
-    
-    <!-- Teléfono -->
     <div class="flex-grow-1">
       <input type="text" [(ngModel)]="customerPhone" placeholder="Telèfon" class="form-control border-gray rounded">
       <div *ngIf="phoneError" class="text-danger">{{phoneError}}</div>
     </div>
-    
-    <!-- Email -->
     <div class="flex-grow-1">
       <input type="email" [(ngModel)]="customerEmail" placeholder="Email" class="form-control border-gray rounded">
       <div *ngIf="emailError" class="text-danger">{{emailError}}</div>
     </div>
     
-    <!-- Botón de solicitud de presupuesto -->
-    <div class="d-flex align-items-end">
+    <!-- Contenedor para el Botón y Mensaje de Error -->
+    <div class="d-flex flex-column flex-grow-1">
       <button class="btn btn-primary" (click)="requestBudget()">Sol·licitar pressupost</button>
+      <!-- Mensaje de error justo debajo del botón -->
+      <div *ngIf="serviceError" class="text-danger">{{ serviceErrorMessage }}</div>
     </div>
   </div>
 </div>

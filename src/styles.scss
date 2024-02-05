@@ -76,3 +76,25 @@
 .icon-blue {
   color: #007bff;
 }
+
+.is-invalid {
+  &:checked {
+    background-color: #dc3545; // Cambia el color de fondo para un switch inválido
+    border-color: #dc3545;
+  }
+}
+
+/* Asegúrate de que el feedback inválido se muestra correctamente */
+.invalid-feedback {
+  display: block;
+}
+
+/* Ajusta los estilos del botón y el mensaje de error para que estén correctamente alineados */
+.btn-primary {
+  margin-right: 0.5rem; /* Asegura un margen a la derecha del botón */
+}
+
+.text-danger {
+  margin-left: 0.5rem; /* Asegura un margen a la izquierda del mensaje de error */
+}
+
