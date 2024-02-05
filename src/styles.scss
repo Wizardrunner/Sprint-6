@@ -98,3 +98,12 @@
   margin-left: 0.5rem; /* Asegura un margen a la izquierda del mensaje de error */
 }
 
+.position-relative {
+  position: relative;
+  .bi-check-circle-fill {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

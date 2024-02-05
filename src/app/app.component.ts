@@ -35,6 +35,19 @@ export class AppComponent {
   emailError: string = '';
   serviceErrorMessage: string = '';
 
+  isNameValid: boolean = false;
+  isPhoneValid: boolean = false;
+  isEmailValid: boolean = false;
+  isServiceSelected: boolean = false; // Para el estado de selección de servicios
+
+  validationAttempted = {
+    name: false,
+    phone: false,
+    email: false,
+    service: false // Asume que también quieres rastrear el intento de validación para la selección de servicio
+  };
+
+
   // Propiedad para el filtro de búsqueda
   filterText: string = '';
   currentSort: { field: string, direction: string } = { field: '', direction: 'asc' };
@@ -43,33 +56,35 @@ export class AppComponent {
     const regex = /^[a-zA-ZñÑçÇáéíóúÁÉÍÓÚ\s]{3,}$/;
     if (!regex.test(this.customerName)) {
       this.nameError = "¡Mínimo 3 letras!";
+      this.isNameValid = false;
+    } else {
+      this.nameError = "";
+      this.isNameValid = true;
     }
+    this.validationAttempted.name = true;
   }
-
+      
   validatePhone() {
+    this.validationAttempted.phone = true;
     const regex = /^[0-9]{9}$/;
-    if (!regex.test(this.customerPhone)) {
-      this.phoneError = "¡9 números!";
-    }
+    this.isPhoneValid = regex.test(this.customerPhone);
+    this.phoneError = this.isPhoneValid ? "" : "¡9 números!";
   }
-
+  
   validateEmail() {
+    this.validationAttempted.email = true;
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!regex.test(this.customerEmail)) {
-      this.emailError = "¡Formato de email!";
-    }
+    this.isEmailValid = regex.test(this.customerEmail);
+    this.emailError = this.isEmailValid ? "" : "¡Formato de email!";
   }
   
   validateServiceSelection() {
-    if (!this.seo && !this.ads && !this.web) {
-      this.serviceError = true;
-      this.serviceErrorMessage = 'Seleccioni un Servei';
-    } else {
-      this.serviceError = false;
-      this.serviceErrorMessage = '';
-    }
+    this.validationAttempted.service = true;
+    this.isServiceSelected = this.seo || this.ads || this.web;
+    this.serviceError = !this.isServiceSelected;
+    this.serviceErrorMessage = this.isServiceSelected ? "" : "Seleccioni un Servei";
   }
-
+    
   // Método para abrir el modal
   openModal(content: string): void {
     this.modalContent = content;
@@ -84,7 +99,8 @@ export class AppComponent {
 
   updateWebOption(): void {
     this.showPanel = this.web;
-    this.calculateBudget(); // Asegura el cálculo inicial del presupuesto cuando se selecciona la opción web.
+    this.calculateBudget();
+    this.validateServiceSelection(); // Añadido para validar la selección de servicios
   }
 
   calculateBudget(): void {
@@ -141,22 +157,32 @@ export class AppComponent {
 
 
   requestBudget() {
-    // Primero, restablecemos los mensajes de error
+    // Marcar todos los campos como intentados al solicitar el presupuesto
+    Object.keys(this.validationAttempted).forEach((key) => {
+      const validKey = key as keyof typeof this.validationAttempted;
+      this.validationAttempted[validKey] = true;
+    });
+  
+    console.log('Nombre del cliente:', this.customerName);
+    console.log('Teléfono del cliente:', this.customerPhone);
+    console.log('Email del cliente:', this.customerEmail);
+  
+    // Restablecer los mensajes de error
     this.nameError = '';
     this.phoneError = '';
     this.emailError = '';
-
-    // Luego, validamos cada campo
+  
+    // Validar cada campo
     this.validateName();
     this.validatePhone();
     this.validateEmail();
     this.validateServiceSelection();
-
-    // Si hay algún error, interrumpimos la ejecución aquí
+  
+    // Verificar si hay errores
     if (this.serviceError || this.nameError || this.phoneError || this.emailError) {
-      return;
+      return; // Interrumpir si hay errores
     }
-
+  
     // Si todo es válido, procedemos a crear el objeto de presupuesto
     const budgetDetails = {
       name: this.customerName,
@@ -169,12 +195,12 @@ export class AppComponent {
       pages: this.numberOfPages,
       languages: this.numberOfLanguages
     };
-
-    // Y lo añadimos a través del servicio de presupuestos
+  
+    // Añadir presupuesto mediante el servicio y restablecer el formulario
     this.budgetService.addBudget(budgetDetails);
     this.resetForm();
   }
-  
+    
     // Agrega un método para obtener los presupuestos
     getBudgets() {
       return this.budgetService.getBudgets();

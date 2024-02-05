@@ -17,8 +17,8 @@ import { CommonModule } from '@angular/common';
       <div>
         <h4 class="fw-bold mt-0 mb-2">Serveis contractats:</h4>
         <ul class="list-unstyled">
-          <li *ngFor="let service of budget.services.split(', ')"><span class="me-2">•</span>{{ service }}</li>
-        </ul>
+  <li *ngFor="let service of budget.services?.split(', ') || []"><span class="me-2">•</span>{{ service }}</li>
+</ul>
       </div>
       <div class="text-end">
         <p class="fw-bold mt-0">Total: <span class="fw-bold fs-2">{{ budget.total }}</span>€</p>

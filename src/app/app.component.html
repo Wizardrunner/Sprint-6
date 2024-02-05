@@ -107,25 +107,32 @@
 <div class="option-box p-5 mb-4 bg-white rounded-3 mx-auto">
   <h3 class="fw-bold">Demanar pressupost</h3>
   <div class="d-flex flex-wrap gap-2">
-    <!-- Inputs para Nombre, Teléfono y Email -->
-    <div class="flex-grow-1">
-      <input type="text" [(ngModel)]="customerName" placeholder="Nom del client/a" class="form-control border-gray rounded">
-      <div *ngIf="nameError" class="text-danger">{{nameError}}</div>
-    </div>
-    <div class="flex-grow-1">
-      <input type="text" [(ngModel)]="customerPhone" placeholder="Telèfon" class="form-control border-gray rounded">
-      <div *ngIf="phoneError" class="text-danger">{{phoneError}}</div>
-    </div>
-    <div class="flex-grow-1">
-      <input type="email" [(ngModel)]="customerEmail" placeholder="Email" class="form-control border-gray rounded">
-      <div *ngIf="emailError" class="text-danger">{{emailError}}</div>
-    </div>
-    
+<!-- Nombre -->
+<div class="flex-grow-1">
+  <input type="text" [(ngModel)]="customerName" placeholder="Nom del client/a" class="form-control border-gray rounded" (input)="validateName()">
+  <div *ngIf="validationAttempted.name && nameError" class="text-danger">{{nameError}}</div>
+  <div *ngIf="validationAttempted.name && isNameValid" class="text-success">✓</div>
+</div>
+
+<!-- Teléfono -->
+<div class="flex-grow-1">
+  <input type="text" [(ngModel)]="customerPhone" placeholder="Telèfon" class="form-control border-gray rounded" (input)="validatePhone()">
+  <div *ngIf="validationAttempted.phone && phoneError" class="text-danger">{{phoneError}}</div>
+  <div *ngIf="validationAttempted.phone && isPhoneValid" class="text-success">✓</div>
+</div>
+
+<!-- Email -->
+<div class="flex-grow-1">
+  <input type="email" [(ngModel)]="customerEmail" placeholder="Email" class="form-control border-gray rounded" (input)="validateEmail()">
+  <div *ngIf="validationAttempted.email && emailError" class="text-danger">{{emailError}}</div>
+  <div *ngIf="validationAttempted.email && isEmailValid" class="text-success">✓</div>
+</div>
+        
     <!-- Contenedor para el Botón y Mensaje de Error -->
     <div class="d-flex flex-column flex-grow-1">
       <button class="btn btn-primary" (click)="requestBudget()">Sol·licitar pressupost</button>
       <!-- Mensaje de error justo debajo del botón -->
-      <div *ngIf="serviceError" class="text-danger">{{ serviceErrorMessage }}</div>
+      <div *ngIf="validationAttempted.service && serviceError" class="text-danger">{{serviceErrorMessage}}</div>
     </div>
   </div>
 </div>
