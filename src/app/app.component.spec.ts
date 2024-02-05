@@ -38,19 +38,19 @@ describe('AppComponent', () => {
     it('should invalidate the form when name is less than 3 characters', () => {
       component.customerName = 'Ju';
       component.validateName();
-      expect(component.nameError).toBe('Solo letras y tres como mínimo');
+      expect(component.nameError).toBe('Mínim 3 lletres!');
     });
 
     it('should invalidate the form when phone number is not 9 digits', () => {
       component.customerPhone = '12345678';
       component.validatePhone();
-      expect(component.phoneError).toBe('Solo números y deben de ser nueve');
+      expect(component.phoneError).toBe('9 números!');
     });
 
     it('should invalidate the form when email is not in correct format', () => {
       component.customerEmail = 'test@test';
       component.validateEmail();
-      expect(component.emailError).toBe('Solo formato de email');
+      expect(component.emailError).toBe('Format d\'email!');
     });
 
     it('should validate the form with correct input values', () => {
