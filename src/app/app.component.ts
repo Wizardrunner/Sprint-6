@@ -55,7 +55,7 @@ export class AppComponent {
   validateName() {
     const regex = /^[a-zA-ZñÑçÇáéíóúÁÉÍÓÚ\s]{3,}$/;
     if (!regex.test(this.customerName)) {
-      this.nameError = "¡Mínimo 3 letras!";
+      this.nameError = "Mínim 3 lletres!";
       this.isNameValid = false;
     } else {
       this.nameError = "";
@@ -68,14 +68,14 @@ export class AppComponent {
     this.validationAttempted.phone = true;
     const regex = /^[0-9]{9}$/;
     this.isPhoneValid = regex.test(this.customerPhone);
-    this.phoneError = this.isPhoneValid ? "" : "¡9 números!";
+    this.phoneError = this.isPhoneValid ? "" : "9 números!";
   }
   
   validateEmail() {
     this.validationAttempted.email = true;
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     this.isEmailValid = regex.test(this.customerEmail);
-    this.emailError = this.isEmailValid ? "" : "¡Formato de email!";
+    this.emailError = this.isEmailValid ? "" : "Format d'email!";
   }
   
   validateServiceSelection() {
@@ -223,6 +223,9 @@ export class AppComponent {
       this.customerEmail = '';
       this.seo = this.ads = this.web = false;
       this.numberOfPages = this.numberOfLanguages = 0;
+      this.validationAttempted.name = false;
+      this.validationAttempted.phone = false;
+      this.validationAttempted.email = false;    
       this.calculateBudget();
     }
     // Métodos para ordenar los presupuestos
