@@ -1,7 +1,6 @@
 // src/app/budgets-list/budgets-list.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-
 @Component({
   selector: 'app-budgets-list',
   standalone: true,
