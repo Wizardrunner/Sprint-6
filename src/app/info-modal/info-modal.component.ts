@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importar CommonModule
+ // Importar CommonModule
 
 @Component({
   selector: 'app-info-modal',
   standalone: true,
-  imports: [CommonModule], // Añadir CommonModule aquí
+  imports: [], // Añadir CommonModule aquí
   templateUrl: './info-modal.component.html',
   styleUrls: ['./info-modal.component.scss']
 })
